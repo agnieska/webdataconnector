@@ -49,20 +49,23 @@
     // Download the data
     myConnector.getData = function(table, doneCallback) {
         //$.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
-        $.getJSON("http://10.118.66.119/v1/dataDistribution/distributionList/", function(resp) {
-            var datasets = resp.data,
+        $.getJSON("http://10.118.66.119/v1/dataDistribution/distributionList/", function(response) {
+            console.log ("response",response)
+            
+            var dataset = response,
                 tableData = [];
 
             // Iterate over the JSON object
-            for (var i = 0, len = datasets.length ; i < len; i++) {
+            
+            for (var i = 0, len = dataset.length ; i < len; i++) {
                 tableData.push({
-                    "function": datasets[i].function,
-                    "subFunction": datasets[i].subfunction,
-                    "reportView": datasets[i].reportView,
-                    "costCentre": datasets[i].costCentre,
-                    "day": datasets[i].day,
-                    "recipient": datasets[i].recipient,
-                    "email": datasets[i].email
+                    "function": dataset[i].function,
+                    "subFunction": dataset[i].subfunction,
+                    "reportView": dataset[i].reportView,
+                    "costCentre": dataset[i].costCentre,
+                    "day": dataset[i].day,
+                    "recipient": dataset[i].recipient,
+                    "email": dataset[i].email
                 });
             }
 
