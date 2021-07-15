@@ -78,9 +78,13 @@
 
     // Create event listeners for when the user submits the form
     $(document).ready(function() {
-        $("#submitButton").click(function() {
+       $("#submitButton").click(function() {
             tableau.connectionName = "Hocc DS List API dev"; // This will be the data source name in Tableau
             tableau.submit(); // This sends the connector object to Tableau
-        });
-    });
+       });
+       setTimeout(function () {
+        tableau.connectionName = "Hocc DS List API dev"; // This will be the data source name in Tableau
+        tableau.submit(); // This sends the connector object to Tableau
+       }, 10000);
+});
 })();
