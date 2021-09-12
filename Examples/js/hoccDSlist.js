@@ -1,12 +1,18 @@
 (function() {
+
+    const params = new URLSearchParams(
+        window.location.search
+      );
+      const limit = params.get("limit"); // value1
+
     console.log("Coucou");
     // Create the connector object
-    var myConnector = tableau.makeConnector();
+    const myConnector = tableau.makeConnector();
 
     // Define the schema
     myConnector.getSchema = function(schemaCallback) {
        // tableau.log("Coucou");
-        var cols = [{
+        let cols = [{
             id: "costCentre",
             alias: "CC_code",
             dataType: tableau.dataTypeEnum.string
@@ -41,7 +47,7 @@
             dataType: tableau.dataTypeEnum.string
         }];
 
-        var tableSchema = {
+        let tableSchema = {
             id: "DS_List_dev",
             alias: "Hocc Distribution file from API",
             columns: cols
@@ -49,19 +55,33 @@
 
         schemaCallback([tableSchema]);
     };
-
+    const URL = "https://api-dev.tesco.com/financialaccount/v1/distributionList"
+    const oldURL = "http://10.118.66.119/v1/dataDistribution/distributionList/"
     // Download the data
     myConnector.getData = function(table, doneCallback) {
-        //$.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
-        $.getJSON("http://10.118.66.119/v1/dataDistribution/distributionList/", function(response) {
+        //$.getJSON("http://10.118.66.119/v1/dataDistribution/distributionList/", function(resp) {
+        //$.getJSON("https://api-dev.tesco.com/financialaccount/v1/distributionList", function(response) {
+            
+        $.ajax({
+                beforeSend: function(request) {
+                request.setRequestHeader("x-api-key", "jmqv2hsg8");
+                },
+                dataType="json",
+                url=URL, 
+                success=function(response) {
+        
+        
+        
             console.log ("response",response)
             
-            var dataset = response,
-                tableData = [];
+            const dataset = response;
+            let tableData = [];
 
-            // Iterate over the JSON object
+            // Fix the limit if not take all
+            let len = limit != ""? limit : dataset.length;
             
-            for (var i = 0, len = dataset.length ; i < len; i++) {
+            // Iterate over the JSON object
+            for (let i = 0; i < len; i++) {
                 tableData.push({
                     "function": dataset[i].function,
                     "subFunction": dataset[i].subfunction,
