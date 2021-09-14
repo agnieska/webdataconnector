@@ -70,7 +70,7 @@
                 //request.setRequestHeader("x-api-key", "TODO");
             },
             dataType: "json",
-            url: oldURL,
+            url: URL,
             success: function (response) {
                 //const response = await fetch(URL, {headers: {"x-api-key": "TODO"}})
                 console.log("response", response)
