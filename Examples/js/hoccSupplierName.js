@@ -1,15 +1,15 @@
-
+/*
 window.addEventListener("DOMContentLoaded", function(){
 
-    const mylist = ["Air France", "British Airways", "Bombay Catering", "Standford University", "Coca-Cola", "Microsoft Trainings", "Google Trainings", "Afghan Railways"];
+    const mylist = ["World Health Organisation", "McDonald", "Kentucky Fried Chicken", "Air France", "British Airways", "Bombay Catering", "Standford University", "Coca-Cola", "Microsoft Trainings", "Google Trainings", "Afghan Railways"];
     console.log(mylist)
     const value = mylist[Math.floor(Math.random() * mylist.length)];
     console.log(value)
     $("#SN").text(value.toString())
 })
+*/
 
 
-/*
 async function call() {
 
     
@@ -49,4 +49,4 @@ async function call() {
 }
 
 call().catch(e => console.log("call error", e)) 
- */
+ 
