@@ -6,12 +6,12 @@
       const id = params.get("id"); // value1
     // console.log("Coucou");
     // Create the connector object
-    var myConnector = tableau.makeConnector();
+    const myConnector = tableau.makeConnector();
 
     // Define the schema
     myConnector.getSchema = function(schemaCallback) {
        // tableau.log("Coucou");
-        var cols = [{
+        let cols = [{
             id: "id",
             alias: "dataset_id",
             dataType: tableau.dataTypeEnum.string
@@ -29,7 +29,7 @@
             dataType: tableau.dataTypeEnum.string
         }];
 
-        var tableSchema = {
+        let tableSchema = {
             id: "datagovFR_List",
             alias: "Liste datasets french open data",
             columns: cols
@@ -45,11 +45,11 @@
 
         //$.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
         $.getJSON("https://www.data.gouv.fr/api/1/datasets/" + id +"/", function(resp) {
-            var dataset = resp,
-                tableData = [];
+            const dataset = resp;
+            let  tableData = [];
 
             // Iterate over the JSON object
-            //for (var i = 0, len = datasets.length ; i < len; i++) {
+            //for (let i = 0, len = datasets.length ; i < len; i++) {
                 tableData.push({
                     "id": dataset.id,
                     "frequency": dataset.frequency,
