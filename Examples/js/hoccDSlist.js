@@ -98,17 +98,21 @@
 
                 table.appendRows(tableData);
                 doneCallback();
-                /*
-                } else if (response.status >= 400 && response.status < 500) {
-                    //$("#SN").text("Result not found for uuid: ")
-                    console.log ("DS file not found")
-        
+            },
+            error: function (response, textStatus, errorThrown) {
+                if (response.status === 401) {
+                    console.log("Authentication error", response.status, response.statusText)
+                    $("#SN").text("Authentication error " + response.status + " " + response.statusText)
+                }
+                if (response.status >= 400 && response.status < 500) {
+                    console.log("DS file not found")
+                    $("#SN").text(response.status + " " + "Result not found")
                 } else {
-                    //$("#SN").text(" error " + response.status + " " + response.statusText)
+                    console.log("error " + response.status + " " + response.statusText)
+                    // console.log(response.text())
+                    $("#SN").text(" error " + response.status + " " + response.statusText)
                     //$("#SC").text(await response.text())
-                    console.log ("error " + response.status + " " + response.statusText)
-                    console.log(response.text())
-                }*/
+                }
             }
         });
     }
